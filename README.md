@@ -77,7 +77,7 @@ What now? Well, there's all sorts of things you can do. Below is a snipet showin
 
 Note that this is a POC-type-of code; it just illustrates the approach and doesn't purport to be optimized in any way.
 
-1. Load all modules and .NET assemblies used by the code.
+Step 1: Load all modules and .NET assemblies used by the code.
 ```
 import psutil, subprocess, random, os, zipfile, shutil, clr, sys, pandas
 
@@ -94,7 +94,7 @@ def initialSetup(pathPowerBI):
     import Microsoft.AnalysisServices.AdomdClient as ADOMD
 ```
 
-2. Create a random folder, extract the item.data (or item1.data) file from the .xlsx file, append .abf to its name, then start the Command Prompt and determine what PID it was assigned by Windows. Then create the msmdsrv.ini settings file and save it in the random folder created. Finally, start the AS engine, connect to it using AMO.NET and finally restore the backup into it.
+Step 2: Create a random folder, extract the item.data (or item1.data) file from the .xlsx file, append .abf to its name, then start the Command Prompt and determine what PID it was assigned by Windows. Then create the msmdsrv.ini settings file and save it in the random folder created. Finally, start the AS engine, connect to it using AMO.NET and finally restore the backup into it.
 ```
 def restorePowerPivot(excelName, pathTarget, port):   
     #create random folder
@@ -195,7 +195,7 @@ def restorePowerPivot(excelName, pathTarget, port):
     return process
 ```
 
-3. Use ADOMD.NET assembly to query the restored database and write the results to a Pandas dataframe.
+Step 3: Use ADOMD.NET assembly to query the restored database and write the results to a Pandas dataframe.
 ```   
 def runQuery(query,port,flag):
     #ADOMD assembly
@@ -257,7 +257,7 @@ def runQuery(query,port,flag):
         return df, metadf
 ```
 
-4. Terminates the session.
+Step 4: Terminate the session.
 ```
 def endSession(process):
     #terminate cmd.exe
