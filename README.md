@@ -184,7 +184,7 @@ def restorePowerPivot(excelName, pathTarget, port):
     process.stdin.write(initString + " \n")
     
     #connect to the AS instance from Python
-    AMOServer = AMO.Server() #method not exposed (from Microsoft.PowerBI.Amo)
+    AMOServer = AMO.Server()
     AMOServer.Connect("localhost:{0}".format(port))
     
     #restore database from PowerPivot abf backup, disconnect
