@@ -71,7 +71,7 @@ Here's an example of the msmdsrv.ini file used to initiatize the AS engine in th
 </ConfigurationSettings>
 ```
 
-## Next steps - querying the Analysis Services model using Python
+## Next steps - querying the Power Pivot model using Python
 
 What now? Well, there's all sorts of things you can do. Below is a snipet showing you how to take a Power Pivot model (which is nothing else but an ABF database backup that's packaged inside of an Excel file) and use AMO.NET assembly to restore the model into our new AS instance, then query it using ADOMD.NET. [I'm using the Excel 2013 version of the sample Power Pivot file found here: https://www.microsoft.com/en-us/download/details.aspx?id=102.]
 
@@ -94,7 +94,7 @@ def initialSetup(pathPowerBI):
     import Microsoft.AnalysisServices.AdomdClient as ADOMD
 ```
 
-Step 2: Create a random folder, extract the item.data (or item1.data) file from the .xlsx file, append .abf to its name, then start the Command Prompt and determine what PID it was assigned by Windows. Then create the msmdsrv.ini settings file and save it in the random folder created. Finally, start the AS engine, connect to it using AMO.NET and finally restore the backup into it.
+Step 2: Create a random folder, extract the item.data (or item1.data if dealing with the Excel 2010 version) file from the .xlsx file, append .abf to its name, then start the Command Prompt and determine what PID it was assigned by Windows. Then create the msmdsrv.ini settings file and save it in the random folder created. Finally, start the AS engine, connect to it using AMO.NET and finally restore the backup into it.
 ```
 def restorePowerPivot(excelName, pathTarget, port):   
     #create random folder
@@ -207,9 +207,9 @@ def runQuery(query,port,flag):
     #read data in via AdomdDataReader object
     DataReader = ADOMDCommand.ExecuteReader()
     
-    #get metadata, number of columns and rows
+    #get metadata, number of columns
     SchemaTable=DataReader.GetSchemaTable()
-    numCol = SchemaTable.Rows.Count #DataReader.FieldCount
+    numCol = SchemaTable.Rows.Count #same as DataReader.FieldCount
     
     #get column names
     columnNames = []
