@@ -73,7 +73,7 @@ Here's an example of the msmdsrv.ini file used to initiatize the AS engine in th
 
 ## Next steps - querying the Power Pivot model using Python
 
-What now? Well, there's all sorts of things you can do. Below is a snippet showing you how to take a Power Pivot model (which is nothing else but an ABF database backup that's packaged inside of an Excel file) and use AMO.NET assembly to restore the model into our new AS instance, then query it using ADOMD.NET. [I'm using the Excel 2013 version of the sample Power Pivot file found here: https://www.microsoft.com/en-us/download/details.aspx?id=102.]
+What now? Well, there's all sorts of things you can do. Below is a snippet showing you how to take a Power Pivot model (which is nothing else but an ABF database backup that's packaged inside of an Excel file) and use AMO.NET assembly to restore the model into our new AS instance, then query it using ADOMD.NET. [I'm using the Excel 2013 version of the sample Power Pivot file found here: https://www.microsoft.com/en-us/download/details.aspx?id=102]
 
 Note that this is a POC-type-of code; it just illustrates the approach and doesn't purport to be optimized in any way.
 
