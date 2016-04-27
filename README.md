@@ -16,7 +16,7 @@ In order to get started, do the following:
 ```
 C:\Users\[USER]\AppData\Local\Microsoft\Power BI Desktop\AnalysisServicesWorkspaces
 ```
-folder and it will always be of the 
+folder and it will always be of the Power Pivot for SharePoint type (i.e. DeploymentMode==1).
 
 Here's an example of the msmdsrv.ini file used to initiatize the AS engine in the tabular mode:
 ```
@@ -96,7 +96,7 @@ def initialSetup(pathPowerBI):
 
 Step 2: Create a random folder, extract the item.data (or item1.data if dealing with the Excel 2010 version) file from the .xlsx file, append .abf to its name, then start the Command Prompt and determine what PID it was assigned by Windows. Then create the msmdsrv.ini settings file and save it in the random folder created. Finally, start the AS engine, connect to it using AMO.NET and finally restore the backup into it.
 ```
-def restorePowerPivot(excelName, pathTarget, port):   
+def restorePowerPivot(excelName, pathTarget, port, pathPowerBI):   
     #create random folder
     os.chdir(pathTarget)
     folder = os.getcwd()+str(random.randrange(10**6,10**7))
@@ -179,8 +179,8 @@ def restorePowerPivot(excelName, pathTarget, port):
     msmdsrvini.close()
     
     #run AS engine inside the cmd.exe process
-    initString = "\"C:\\Program Files\\Microsoft Power BI Desktop\\bin\\msmdsrv.exe\" -c -s \"{0}\""
-    initString = initString.format(folder)
+    initString = "\"{0}\\msmdsrv.exe\" -c -s \"{1}\""
+    initString = initString.format(pathPowerBI.replace("/","\\"),folder)
     process.stdin.write(initString + " \n")
     
     #connect to the AS instance from Python
@@ -269,8 +269,9 @@ def endSession(process):
 
 If you download the sample Power Pivot file from Microsoft's website, you can test everything by appropriately modifying the following couple of lines of code:
 ```
-initialSetup("C:/Program Files/Microsoft Power BI Desktop/bin")
-session = restorePowerPivot("D:/Downloads/PowerPivotTutorialSample.xlsx", "D:/", 60000)
+pathPowerBI="C:/Program Files/Microsoft Power BI Desktop/bin"
+initialSetup(pathPowerBI)
+session = restorePowerPivot("D:/Downloads/PowerPivotTutorialSample.xlsx", "D:/", 60000, pathPowerBI)
 tables = runQueryMDX(60000)
 df = runQuery("EVALUATE dbo_DimProduct",60000,0)
 df, metadf = runQuery("EVALUATE dbo_DimProduct",60000,1)
