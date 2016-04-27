@@ -272,7 +272,6 @@ If you download the sample Power Pivot file from Microsoft's website, you can te
 pathPowerBI="C:/Program Files/Microsoft Power BI Desktop/bin"
 initialSetup(pathPowerBI)
 session = restorePowerPivot("D:/Downloads/PowerPivotTutorialSample.xlsx", "D:/", 60000, pathPowerBI)
-tables = runQueryMDX(60000)
 df = runQuery("EVALUATE dbo_DimProduct",60000,0)
 df, metadf = runQuery("EVALUATE dbo_DimProduct",60000,1)
 endSession(session)
