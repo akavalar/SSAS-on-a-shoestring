@@ -277,3 +277,20 @@ df = runQuery("EVALUATE dbo_DimProduct",60000,0)
 df, metadf = runQuery("EVALUATE dbo_DimProduct",60000,1)
 endSession(session)
 ```
+
+## Additional thoughts
+If you want to restore the ABF file into the Power Pivot for Sharepoint type of AS instance, you need to do the following:
+```
+clr.AddReference("System.IO") # mscorlib.dll
+import System.IO as SIO
+Stream = SIO.FileStream(target, 3) # 3 = FileMode.Open
+AMOImageLoadInfo=AMO.ImageLoadInfo("SomeDatabaseName","SomeDatabaseID", Stream, 0) # 0 = ReadWrite mode
+AMOServer.ImageLoad(AMOImageLoadInfo)
+AMOServer.Refresh()
+Stream.Close()
+```
+
+And if you want to execute some arbitrary XMLA code, you can do the following:
+```
+AMOServer.Execute(YourXMLAcodeString)
+```
