@@ -278,7 +278,7 @@ df, metadf = runQuery("EVALUATE dbo_DimProduct",60000,1)
 endSession(session)
 ```
 
-## Additional thoughts
+## Final thoughts
 If you want to restore the ABF file into the Power Pivot for Sharepoint type of AS instance, you need to do the following:
 ```
 clr.AddReference("System.IO") # mscorlib.dll
