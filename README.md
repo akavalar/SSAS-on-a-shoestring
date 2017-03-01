@@ -6,7 +6,7 @@ Suppose you want to use Analysis Services but don't have access to SQL Server En
 
 In order to get started, do the following:
 - Install Power BI Desktop (here I'm assuming you're using the 64-bit version).
-- Create the msmdsrv.ini file containing the server properties. You can read about the various options here: https://msdn.microsoft.com/en-us/library/ms174556.aspx. Most importantly, make sure you know the PID (process ID) of the application that will call the Analysis Services engine (i.e. the PrivateProcess property). I wasn't able to get it to work without this. For me, this meant finding the PID of the Command Prompt. Also, set the DeploymentMode setting (multidimensional, tabular, Power Pivot for SharePoint) and pick the port that works for you.
+- Create the msmdsrv.ini file containing the server properties. You can read about the various options [on MS website](http://msdn.microsoft.com/en-us/library/ms174556.aspx). Most importantly, make sure you know the PID (process ID) of the application that will call the Analysis Services engine (i.e. the PrivateProcess property). I wasn't able to get it to work without this. For me, this meant finding the PID of the Command Prompt. Also, set the DeploymentMode setting (multidimensional, tabular, Power Pivot for SharePoint) and pick the port that works for you.
 - Start the msmdsrv.exe engine by pointing it at the folder where you put the .ini file:
 ```
 "C:\Program Files\Microsoft Power BI Desktop\bin\msmdsrv.exe" -c -s [YOUR FOLDER (in quotes if path contains spaces)]
@@ -16,7 +16,7 @@ In order to get started, do the following:
 ```
 C:\Users\[USER]\AppData\Local\Microsoft\Power BI Desktop\AnalysisServicesWorkspaces
 ```
-folder and it will always be of the Power Pivot for SharePoint type (i.e. DeploymentMode==1).
+folder and it will always be of the Power Pivot for SharePoint type (i.e. DeploymentMode=1).
 
 Here's an example of the msmdsrv.ini file used to initiatize the AS engine in the tabular mode:
 ```
@@ -73,9 +73,9 @@ Here's an example of the msmdsrv.ini file used to initiatize the AS engine in th
 
 ## Next steps - querying the Power Pivot model using Python 2.7
 
-What now? Well, there's all sorts of things you can do. Below is a snippet showing you how to take a Power Pivot model (which is nothing else but an ABF database backup that's packaged inside of an Excel file) and use AMO.NET assembly to restore the model into our new AS instance, then query it using ADOMD.NET. [I'm using the Excel 2013 version of the sample Power Pivot file found here: https://www.microsoft.com/en-us/download/details.aspx?id=102]
+What now? Well, there's all sorts of things you can do. Below is a snippet showing you how to take a Power Pivot model (which is nothing else but an ABF database backup that's packaged inside of an Excel file) and use AMO.NET assembly to restore the model into our new AS instance, then query it using ADOMD.NET. [I'm using the [Excel 2013 version of the sample Power Pivot file](http://www.microsoft.com/en-us/download/details.aspx?id=102).]
 
-Note that this is a POC-type-of code; it just illustrates the approach and doesn't purport to be optimized in any way.
+Note that this is a POC-type-of code; it just illustrates the approach and doesn't purport to be optimized in any way. The entire code has also been posted on [StackOverflow](http://stackoverflow.com/a/36878268/5803031).
 
 Step 1: Load all modules and .NET assemblies used by the code.
 ```
