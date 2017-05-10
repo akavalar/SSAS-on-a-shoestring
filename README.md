@@ -293,3 +293,5 @@ And if you want to execute some arbitrary XMLA code, you can do the following:
 ```
 AMOServer.Execute(YourXMLAcodeString)
 ```
+## Update: Adding Users
+If you'd like to add another user, see this [comment](http://github.com/akavalar/SSAS-on-a-shoestring/issues/2#issuecomment-300483427) by @hugovanier.
